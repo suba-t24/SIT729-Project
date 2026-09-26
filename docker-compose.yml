@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  mqtt:
+    image: eclipse-mosquitto:2.0
+    container_name: scemirp-mqtt
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+    restart: unless-stopped
+
+  mongodb:
+    image: mongo:6.0
+    container_name: scemirp-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo_data:/data/db
+    restart: unless-stopped
+
+  node-red:
+    image: nodered/node-red:latest
+    container_name: scemirp-nodered
+    ports:
+      - "1880:1880"
+    volumes:
+      - ./node_red_data:/data
+    environment:
+      - TZ=Australia/Sydney
+    depends_on:
+      - mqtt
+      - mongodb
+      - backend
+    restart: unless-stopped
+
+  backend:
+    build: ./backend
+    container_name: scemirp-backend
+    ports:
+      - "3001:3001"
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/scemirp
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+
+  simulators:
+    build: ./simulators
+    container_name: scemirp-simulators
+    environment:
+      - MQTT_BROKER=mqtt://mqtt:1883
+    depends_on:
+      - mqtt
+    restart: unless-stopped
+    
+  dashboard:
+    build: ./dashboard
+    container_name: scemirp-dashboard
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    restart: unless-stopped

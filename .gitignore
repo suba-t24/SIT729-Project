@@ -1,0 +1,8 @@
+node_modules/
+.env
+mongo_data/
+node_red_data/
+mosquitto/data/
+mosquitto/log/
+.DS_Store
+dist/

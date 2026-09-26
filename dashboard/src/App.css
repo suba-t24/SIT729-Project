@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+:root {
+  --bg-color: #0f172a;
+  --text-color: #f8fafc;
+  --card-bg: #1e293b;
+  --primary: #3b82f6;
+  --border-color: #334155;
+  
+  --severity-low: #3b82f6;
+  --severity-medium: #f59e0b;
+  --severity-high: #ef4444;
+  --severity-critical: #991b1b;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  background: -webkit-linear-gradient(#60a5fa, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header p {
+  color: #94a3b8;
+}
+
+.incidents-section, .events-section {
+  margin-bottom: 4rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.incident-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.incident-card {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border-top: 4px solid var(--primary);
+  transition: transform 0.2s ease;
+}
+
+.incident-card:hover {
+  transform: translateY(-5px);
+}
+
+.incident-card.severity-high { border-top-color: var(--severity-high); }
+.incident-card.severity-critical { border-top-color: var(--severity-critical); }
+.incident-card.severity-medium { border-top-color: var(--severity-medium); }
+
+.incident-card h3 {
+  margin-top: 0;
+  font-size: 1.2rem;
+}
+
+.table-container {
+  overflow-x: auto;
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+th, td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+th {
+  background-color: rgba(0,0,0,0.2);
+  font-weight: 600;
+}
+
+.event-row:hover {
+  background-color: rgba(255,255,255,0.05);
+}
+
+.event-row.severity-high td { color: #fca5a5; }
+.event-row.severity-medium td { color: #fcd34d; }
