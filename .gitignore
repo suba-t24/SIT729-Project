@@ -7,3 +7,4 @@ mosquitto/data/
 mosquitto/log/
 .DS_Store
 dist/
+reports/
