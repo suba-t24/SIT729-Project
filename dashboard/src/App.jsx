@@ -8,10 +8,11 @@ function App() {
 
   const fetchData = async () => {
     try {
-      const incidentRes = await axios.get('http://localhost:3001/api/incidents');
+      const API_HOST = window.location.hostname;
+      const incidentRes = await axios.get(`http://${API_HOST}:3001/api/incidents`);
       setIncidents(incidentRes.data);
       
-      const eventRes = await axios.get('http://localhost:3001/api/events');
+      const eventRes = await axios.get(`http://${API_HOST}:3001/api/events`);
       setEvents(eventRes.data);
     } catch (error) {
       console.error("Error fetching data:", error);
