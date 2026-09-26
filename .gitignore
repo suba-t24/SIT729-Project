@@ -1,7 +1,8 @@
 node_modules/
 .env
 mongo_data/
-node_red_data/
+node_red_data/*
+!node_red_data/flows.json
 mosquitto/data/
 mosquitto/log/
 .DS_Store
